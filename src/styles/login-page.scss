@@ -1,0 +1,66 @@
+@import 'variables';
+
+.login-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('./images/background.jpg') no-repeat center center;
+    background-size: cover;
+
+    &__logo {
+        display: block;
+        width: 315px;
+        margin: 0 auto;
+    }
+
+    &__form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 600px;
+        height: 400px;
+        border-radius: 8px;
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.15);
+        background-color: white;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+
+    &__title {
+        color: $black;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 0.2px;
+    }
+
+    &__input {
+        width: 100%;
+        height: 48px;
+        margin-top: 48px;
+        padding: 0 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: $light-gray;
+        line-height: 1;
+        outline: none;
+    }
+
+    &__button {
+        margin-top: 48px;
+        padding: 16px 50px;
+        border: none;
+        border-radius: 100px;
+        box-shadow: 0 4px 16px 0 rgba(237, 65, 89, 0.4);
+        background: $pink;
+        color: white;
+        outline: none;
+        cursor: pointer;
+    }
+}
