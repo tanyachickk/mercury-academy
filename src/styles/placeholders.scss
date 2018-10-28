@@ -11,7 +11,6 @@
 }
 
 %button {
-    margin-top: 48px;
     padding: 16px 50px;
     border: none;
     border-radius: 100px;
@@ -29,7 +28,7 @@
         background-color: white;
         box-shadow: 0 6px 20px 0 rgba($color: $pink-shadow, $alpha: 0.4);
     }
-    &_active {
+    &:focus {
         box-shadow: 0 2px 10px 0 rgba($color: $pink-shadow, $alpha: 0.5);
     }
 }

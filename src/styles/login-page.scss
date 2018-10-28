@@ -9,7 +9,7 @@
     width: 100%;
     min-height: 100vh;
     background:
-        url('./images/background.jpg') no-repeat center center,
+        url('./images/progressive-bg.jpg') no-repeat center center,
         linear-gradient(138deg, rgb(255, 67, 92) 0%, rgb(206, 44, 127) 100%);
     background-size: cover;
 
@@ -69,6 +69,7 @@
     }
 
     &__error {
+        display: none;
         width: 100%;
         margin-top: 32px;
         padding: 10px 16px;
@@ -79,14 +80,31 @@
     }
 
     &__button {
+        margin-top: 48px;
         @extend %button;
     }
 }
 
 .logout-form {
+    display: none;
     @extend %form-wrapper;
 
+    &__avatar {
+        width: 128px;
+        height: 128px;
+        border: solid 1px #979797;
+        border-radius: 50%;
+    }
+
+    &__username {
+        margin-top: 40px;
+        color: $black;
+        font-size: 1.75rem;
+        letter-spacing: .2;
+    }
+
     &__button {
+        margin-top: 56px;
         @extend %button;
     }
 }
