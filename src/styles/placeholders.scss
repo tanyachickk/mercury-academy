@@ -3,11 +3,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 600px;
+    width: 600px;
     border-radius: 8px;
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.15);
     background-color: white;
-    padding: 48px;
+    padding: $lg-margin;
+    @media (max-width: $extra-lg-screen) {
+        width: 100%;
+    }
+    @media (max-width: $lg-screen) {
+        padding: $md-margin $md-margin $lg-margin $md-margin;
+    }
+    @media (max-width: $sm-screen) {
+        padding: $md-margin $sm-margin $lg-margin $sm-margin;
+    }
 }
 
 %button {

@@ -1,12 +1,14 @@
 @font-face {
-    font-family: 'Gotham';
-    src: url('./fonts/GothamMedium.ttf');
+    font-family: Gotham;
+    src: url('./fonts/GothamMedium.otf'),
+        url('./fonts/GothamMedium.ttf') format('truetype'),
+        url('./fonts/GothamMedium.woff2') format('woff2');
     font-weight: 500;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Gotham';
+    font-family: Gotham;
     src: url('./fonts/GothamBold.ttf');
     font-weight: 700;
     font-display: swap;
