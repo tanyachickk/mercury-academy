@@ -1,6 +1,4 @@
 const LoginModule = (() => {
-    const isLoggedIn = false;
-
     const handleResponse = (response) =>
         response.json().then((json) => {
             if (!response.ok) {
