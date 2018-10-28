@@ -1,6 +1,7 @@
-### Mercury Academy Test Task
+# Mercury Academy Test Task
 
 Desktop version
+
 ![](./preview.gif?raw=true)
 
 
