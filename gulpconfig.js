@@ -4,25 +4,21 @@ module.exports = {
     js: {
         src: ['src/scripts/login.js', 'src/scripts/main.js'],
         dest: 'src',
-        prodDest: 'build',
+        prodDest: './build',
         watch: 'src/scripts/*.js'
     },
     scss: {
         src: 'src/styles/main.scss',
         dest: 'src',
-        prodDest: 'dist',
-        watch: 'static/styles/**/*.scss'
+        prodDest: './build',
+        watch: 'src/styles/*.scss'
     },
     html: {
         src: 'src/index.html',
-        prodDest: 'dist',
+        prodDest: './build',
         watch: 'src/index.html',
     },
-    assets: {
-        src: 'src/assets/**',
-        prodDest: 'src/assets'
-    },
     images: {
-        src: 'src/assets/images/**/*'
+        src: 'src/images/*'
     }
 }

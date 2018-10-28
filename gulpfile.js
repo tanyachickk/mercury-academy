@@ -29,12 +29,13 @@ gulp.task('html', () =>
 
 gulp.task('html:prod', () =>
     gulp.src(config.html.src)
-        .pipe(gulp.dest(config.html.dest))
+        .pipe(gulp.dest(config.html.prodDest))
 );
 
 gulp.task('sass', () =>
     gulp.src(config.scss.src)
         .pipe(sass().on('error', notify.onError({title: 'sass'})))
+        .pipe(prefix({browsers: ['last 2 versions'], cascade: true}))
         .pipe(cssmin())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(config.scss.dest))
@@ -43,11 +44,11 @@ gulp.task('sass', () =>
 
 gulp.task('sass:prod', () =>
     gulp.src(config.scss.src)
-        .pipe(uncss({html: [config.html.src]}))
+        .pipe(sass().on('error', notify.onError({title: 'sass'})))
         .pipe(prefix({browsers: ['last 2 versions'], cascade: true}))
         .pipe(cssmin())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(config.scss.prodDest))
+        .pipe(gulp.dest('./build'))
         .pipe(bs.stream())
 );
 
@@ -72,7 +73,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('clean', () =>
-    del(config.dest)
+    del('./build/*')
 );
 
 gulp.task('image', () =>
@@ -86,6 +87,6 @@ gulp.task('fonts', () =>
         .pipe(gulp.dest('./build/fonts'))
 );
 
-gulp.task('build', ['clean', 'html:prod', 'sass:prod', 'js', 'image', 'fonts']);
+gulp.task('build', ['clean', 'html:prod', 'sass:prod', 'js:prod', 'image', 'fonts']);
 
 gulp.task('default', ['sass', 'js', 'server', 'watch']);
