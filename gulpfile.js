@@ -22,6 +22,11 @@ gulp.task('server', () => {
     gulp.watch(config.html.watch).on('change', bs.reload);
 });
 
+gulp.task('html', () =>
+    gulp.src(config.html.src)
+        .pipe(gulp.dest(config.html.dest))
+);
+
 gulp.task('html:prod', () =>
     gulp.src(config.html.src)
         .pipe(gulp.dest(config.html.dest))

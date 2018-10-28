@@ -2,7 +2,7 @@ module.exports = {
     source: './src',
     dest: './build',
     js: {
-        src: 'src/scripts/*.js',
+        src: ['src/scripts/login.js', 'src/scripts/main.js'],
         dest: 'src',
         prodDest: 'build',
         watch: 'src/scripts/*.js'

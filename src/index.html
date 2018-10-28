@@ -9,14 +9,24 @@
 </head>
 <body>
     <main class="login-page">
-        <img class="login-page__logo" src="images/w-mercury-development.svg" alt="logo">
+        <div class="login-page__logo">
+            <img class="company-logo" src="images/w-mercury-development.svg" alt="logo">
+        </div>
         <div class="login-page__form">
             <form class="login-form">
                 <div class="login-form__title">Log in</div>
-                <input class="login-form__input" type="email" placeholder="E-Mail">
-                <input class="login-form__input" type="password" placeholder="Password">
+                <input class="login-form__input" name="email" type="email" placeholder="E-Mail" required>
+                <input class="login-form__input" name="password" type="password" placeholder="Password" required>
+                <div class="login-form__error">Error message</div>
                 <button class="login-form__button" type="submit">Login</button>
             </form>
+            <!-- <form class="logout-form">
+                <div class="logout-form__avatar">
+                    <img src="" alt="avatar">
+                </div>
+                <div class="logout-form__username">Username</div>
+                <button class="logout-form__button" type="submit">Logout</button>
+            </form> -->
         </div>
     </main>
     <script src="./main.js"></script>
