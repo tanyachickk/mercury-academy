@@ -18,7 +18,9 @@
     box-shadow: 0 4px 16px 0 rgba($color: $pink-shadow, $alpha: 0.4);
     background-color: $pink;
     color: white;
-    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.875rem;
     outline: none;
     transition: all .2s ease;
     cursor: pointer;
