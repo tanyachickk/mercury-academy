@@ -1,58 +1,75 @@
 
 .login-page {
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    grid-template-rows: 30% auto;
-    grid-template-areas:
-        '. logo .'
-        '. form .';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     min-height: 100vh;
     background:
         url('./images/progressive-bg.jpg') no-repeat center center,
         linear-gradient(138deg, rgb(255, 67, 92) 0%, rgb(206, 44, 127) 100%);
     background-size: cover;
-    @media (max-width: $md-screen) {
-        grid-template-columns: auto 400px auto;
-        grid-template-rows: 200px auto;
-    }
     @media (max-width: $sm-screen) {
-        grid-template-columns: 20px auto 20px;
-        grid-template-rows: 120px auto;
+        padding: 0 16px;
     }
 
     &__logo {
-        grid-area: logo;
-        justify-self: center;
-        align-self: center;
+        margin-top: 141px;
+        margin-right: 29px;
+        @media (max-width: $extra-lg-screen) {
+            margin-top: 120px;
+        }
+        @media (max-width: $lg-screen) {
+            margin-top: 90px;
+            margin-right: 20px;
+        }
+        @media (max-width: $md-screen) {
+            margin-top: 80px;
+            margin-right: 18px;
+        }
+        @media (max-width: $sm-screen) {
+            margin-top: 43px;
+            margin-right: 4px;
+        }
     }
 
     &__form {
-        grid-area: form;
-        justify-self: center;
+        width: 600px;
+        margin-top: 125px;
+        margin-bottom: 50px;
         @media (max-width: $extra-lg-screen) {
-            justify-self: stretch;
+            width: 100%;
+            max-width: 550px;
+            margin-top: 110px;
+        }
+        @media (max-width: $lg-screen) {
+            max-width: 500px;
+            margin-top: 100px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: $md-screen) {
+            max-width: 450px;
+            margin-top: 80px;
+        }
+        @media (max-width: $sm-screen) {
+            margin-top: 37px;
+            margin-bottom: 30px;
         }
     }
 }
 
 .company-logo {
-    margin-top: 20px;
-    margin-right: 30px;
     width: 315px;
-    @media (max-width: $lg-screen) {
-        margin-top: 20px;
-        margin-right: 20px;
+    @media (max-width: $extra-lg-screen) {
         width: 280px;
     }
+    @media (max-width: $lg-screen) {
+        width: 250px;
+    }
     @media (max-width: $md-screen) {
-        margin-top: 15px;
-        margin-right: 10px;
-        width: 220px;
+        width: 240px;
     }
     @media (max-width: $sm-screen) {
-        margin-top: 6px;
-        margin-right: 4px;
         width: 182px;
     }
 }
@@ -64,16 +81,18 @@
         color: $black;
         font-size: 1.5rem;
         font-weight: 700;
+        line-height: 1.21;
         letter-spacing: 0.2px;
         @media (max-width: $sm-screen) {
             font-size: 1.25rem;
+            line-height: 1.2;
         }
     }
 
     &__input {
         width: 100%;
         height: 48px;
-        margin-top: 48px;
+        margin-top: 32px;
         padding: 0 16px;
         border: none;
         border-radius: 4px;
@@ -82,13 +101,13 @@
         font-size: 1rem;
         line-height: 1;
         outline: none;
-        @media (max-width: $md-screen) {
-            margin-top: $md-margin;
+        &:first-of-type {
+            margin-top: 48px;
         }
         @media (max-width: $sm-screen) {
-            margin-top: $sm-margin;
-            &:first-child {
-                margin-top: $md-margin;
+            margin-top: 24px;
+            &:first-of-type {
+                margin-top: 32px;
             }
         }
         &:focus {
@@ -114,19 +133,21 @@
         display: none;
         width: 100%;
         margin-top: 32px;
-        padding: 10px 16px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 16px;
         border-radius: 4px;
         color: $pink;
         background-color: rgba($color: $pink, $alpha: 0.25);
         font-size: 0.875rem;
         @media (max-width: $sm-screen) {
-            margin-top: $sm-margin;
+            margin-top: 24px;
         }
     }
 
     &__button {
-        margin-top: 48px;
         @extend %button;
+        margin-top: 48px;
         @media (max-width: $sm-screen) {
             margin-top: 40px;
         }
@@ -134,8 +155,15 @@
 }
 
 .logout-form {
-    display: none;
     @extend %form-wrapper;
+    display: none;
+    margin-top: 91px;
+    @media (max-width: $md-screen) {
+        margin-top: 80px;
+    }
+    @media (max-width: $sm-screen) {
+        margin-top: 37px;
+    }
 
     &__avatar {
         width: 128px;
@@ -152,17 +180,18 @@
         margin-top: 40px;
         color: $black;
         font-size: 1.75rem;
+        line-height: 1.22;
         letter-spacing: .2;
         opacity: .8;
         @media (max-width: $sm-screen) {
-            margin-top: $sm-margin;
+            margin-top: 24px;
             font-size: 1.125rem;
         }
     }
 
     &__button {
-        margin-top: 56px;
         @extend %button;
+        margin-top: 56px;
         @media (max-width: $sm-screen) {
             margin-top: 40px;
         }
