@@ -75,8 +75,8 @@
 }
 
 .login-form {
-    position: relative;
     @extend %form-wrapper;
+    display: none;
 
     &__title {
         color: $black;

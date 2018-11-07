@@ -36,16 +36,21 @@ function logout(event) {
     emailInput.value = '';
     passwordInput.value = '';
 
-    logoutForm.style.display = 'none';
-    loginForm.style.display = 'flex';
+    slideOut(logoutForm, 50, 200);
+    setTimeout(() => {
+        slideIn(loginForm, 200, 500);
+    }, 200);
+    
 }
 
 function onSuccessLogin({ name, photoUrl }) {
     usernameElement.innerText = name;
     avatarElement.src = photoUrl;
 
-    loginForm.style.display = 'none';
-    logoutForm.style.display = 'flex';
+    slideOut(loginForm, 50, 200);
+    setTimeout(() => {
+        slideIn(logoutForm, 200, 500);
+    }, 200);
 }
 
 function onErrorLogin({ message }) {
@@ -75,3 +80,7 @@ passwordInput.addEventListener('input', () => {
         errorAlert.style.display = 'none';
     }
 });
+
+window.onload = () => {
+    slideIn(loginForm, 200, 500);
+}
