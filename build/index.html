@@ -12,20 +12,21 @@
         <div class="login-page__logo">
             <img class="company-logo" src="images/w-mercury-development.svg" alt="logo">
         </div>
-        <div class="login-page__form">
-            <form class="login-form" method="POST">
-                <div class="login-form__title">Log in</div>
-                <input class="login-form__input" name="email" type="email" placeholder="E-Mail" required>
-                <input class="login-form__input" name="password" type="password" placeholder="Password" required>
-                <div class="login-form__error"></div>
-                <button class="login-form__button">Login</button>
-            </form>
-            <form class="logout-form" method="POST">
-                <img class="logout-form__avatar" src="" alt="avatar">
-                <div class="logout-form__username"></div>
-                <button class="logout-form__button">Logout</button>
-            </form>
-        </div>
+        <form class="login-page__form login-form" method="POST">
+            <div class="login-form__title">Log in</div>
+            <input class="login-form__input" name="email" type="email" placeholder="E-Mail" required>
+            <input class="login-form__input" name="password" type="password" placeholder="Password" required>
+            <div class="login-form__error"></div>
+            <button class="login-form__button">Login</button>
+            <div class="login-form__loader">
+                <div class="loader"></div>
+            </div>
+        </form>
+        <form class="login-page__form logout-form" method="POST">
+            <img class="logout-form__avatar" src="" alt="avatar">
+            <div class="logout-form__username"></div>
+            <button class="logout-form__button">Logout</button>
+        </form>
     </main>
     <script src="./main.js"></script>
 </body>

@@ -1,31 +1,85 @@
-const LoginModule = (() => {
-    const isLoggedIn = false;
+function animate(draw, duration, callback) {
+    var start = performance.now();
+    requestAnimationFrame(function animate(time) {
+        var timePassed = time - start;
+        if (timePassed > duration) timePassed = duration;
+        draw(timePassed);
+        if (timePassed < duration) {
+            requestAnimationFrame(animate);
+        } else if (callback) {
+            callback();
+        }
+    });
+}
 
-    const handleResponse = (response) =>
-        response.json().then((json) => {
-            if (!response.ok) {
-                const error = { ...json, status: response.status };
-                return Promise.reject(error);
+function slideIn(element, distance, duration, displayTo = 'flex') {
+    element.style.opacity = 0;
+    element.style.display = displayTo;
+    animate((timePassed) => {
+        const progress = timePassed / duration;
+        element.style.opacity = progress;
+        element.style.left = `${- distance + distance * progress}px`;
+    }, duration);
+}
+
+function slideOut(element, distance, duration) {
+    animate((timePassed) => {
+        const progress = timePassed / duration;
+        element.style.opacity = 1 - progress;
+        element.style.left = `${distance * progress}px`;
+    }, duration, () => { element.style.display = 'none'; });
+}
+class LoginModule {
+    async login({ email, password }) {
+        const url = 'https://us-central1-mercdev-academy.cloudfunctions.net/login';
+        const requestParams = {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        };
+
+        const response = await fetch(url, requestParams).catch((error) => 
+            Promise.reject({
+                message: 'Network error',
+                body: error,
+            })
+        );
+
+        try {
+            const parsedData = await response.json();
+            if (response.ok) {
+                return parsedData;
             }
-            return json;
-        });
-    
 
-    return {
-        login: ({ email, password }) => {
-            const url = 'https://us-central1-mercdev-academy.cloudfunctions.net/login';
-            const requestParams = {
-                method: 'POST',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-            };
-            return fetch(url, requestParams).then(handleResponse);
-        },
-        logout: () => {
-            console.log('logout');
-        },
-    };
-})();
+            if (parsedData && parsedData.error) {
+                return Promise.reject({
+                    message: parsedData.error,
+                    status: response.status,
+                    body: parsedData,
+                });
+            }
+
+            let errorMessage = '';
+            if (response.status >= 500) {
+                errorMessage = 'Server error. Try again';
+            } else if (response.status >= 400 && response.status < 500) {
+                errorMessage = 'Application error';
+            }
+
+            return Promise.reject({
+                message: errorMessage || 'Unhandled error',
+                status: response.status,
+                body: parsedData,
+            });
+        } catch(error) {
+            return Promise.reject({
+                message: 'Invalid server data',
+                status: response.status,
+                body: error,
+            });
+        }
+    }
+}
 
 const INPUT_ERROR_CLASS = 'login-form__input_error';
 
@@ -33,11 +87,12 @@ const [ loginForm, logoutForm ] = document.getElementsByTagName('form');
 const [ emailInput, passwordInput ] = document.getElementsByTagName('input');
 const [ loginButton, logoutButton ] = document.getElementsByTagName('button');
 
+const loginLoader = document.getElementsByClassName('login-form__loader')[0];
 const errorAlert = document.getElementsByClassName('login-form__error')[0];
 const avatarElement = document.getElementsByClassName('logout-form__avatar')[0];
 const usernameElement = document.getElementsByClassName('logout-form__username')[0];
 
-function login(event) {
+async function login(event) {
     const email = emailInput.value;
     const password = passwordInput.value;
 
@@ -46,9 +101,16 @@ function login(event) {
     }
     event.preventDefault();
 
-    LoginModule.login({ email, password })
-        .then((res) => onSuccessLogin(res))
-        .catch((error) => onErrorLogin(error));
+    const AuthService = new LoginModule();
+    try {
+        loginLoader.style.display = 'block';
+        const data = await AuthService.login({ email, password });
+        loginLoader.style.display = 'none';
+        onSuccessLogin(data);
+    } catch (error) {
+        loginLoader.style.display = 'none';
+        onErrorLogin(error);
+    }
 }
 
 function logout(event) {
@@ -57,20 +119,25 @@ function logout(event) {
     emailInput.value = '';
     passwordInput.value = '';
 
-    logoutForm.style.display = 'none';
-    loginForm.style.display = 'flex';
+    slideOut(logoutForm, 50, 200);
+    setTimeout(() => {
+        slideIn(loginForm, 200, 500);
+    }, 200);
+    
 }
 
 function onSuccessLogin({ name, photoUrl }) {
     usernameElement.innerText = name;
     avatarElement.src = photoUrl;
 
-    loginForm.style.display = 'none';
-    logoutForm.style.display = 'flex';
+    slideOut(loginForm, 50, 200);
+    setTimeout(() => {
+        slideIn(logoutForm, 200, 500);
+    }, 200);
 }
 
-function onErrorLogin({ error }) {
-    errorAlert.innerText = error;
+function onErrorLogin({ message }) {
+    errorAlert.innerText = message;
     errorAlert.style.display = 'block';
     passwordInput.value = '';
     emailInput.classList.add(INPUT_ERROR_CLASS);
@@ -96,3 +163,7 @@ passwordInput.addEventListener('input', () => {
         errorAlert.style.display = 'none';
     }
 });
+
+window.onload = () => {
+    slideIn(loginForm, 200, 500);
+}
