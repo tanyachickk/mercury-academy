@@ -8,7 +8,7 @@ const errorAlert = document.getElementsByClassName('login-form__error')[0];
 const avatarElement = document.getElementsByClassName('logout-form__avatar')[0];
 const usernameElement = document.getElementsByClassName('logout-form__username')[0];
 
-function login(event) {
+async function login(event) {
     const email = emailInput.value;
     const password = passwordInput.value;
 
@@ -17,9 +17,13 @@ function login(event) {
     }
     event.preventDefault();
 
-    LoginModule.login({ email, password })
-        .then((res) => onSuccessLogin(res))
-        .catch((error) => onErrorLogin(error));
+    const AuthService = new LoginModule();
+    try {
+        const data = await AuthService.login({ email, password });
+        onSuccessLogin(data);
+    } catch (error) {
+        onErrorLogin(error);
+    }
 }
 
 function logout(event) {
@@ -40,8 +44,8 @@ function onSuccessLogin({ name, photoUrl }) {
     logoutForm.style.display = 'flex';
 }
 
-function onErrorLogin({ error }) {
-    errorAlert.innerText = error;
+function onErrorLogin({ message }) {
+    errorAlert.innerText = message;
     errorAlert.style.display = 'block';
     passwordInput.value = '';
     emailInput.classList.add(INPUT_ERROR_CLASS);
