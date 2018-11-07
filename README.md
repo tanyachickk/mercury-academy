@@ -14,7 +14,7 @@ git clone https://github.com/androsovatati/mercury-academy.git
 npm i -g serve
 yarn global add serve
 ```
-3. Finally, run this command to see a project on http://localhost:5000/
+3. Finally, run this command inside project's directory to see a project on http://localhost:5000/
 ```
 serve ./build
 ```
