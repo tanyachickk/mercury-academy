@@ -4,6 +4,7 @@ const [ loginForm, logoutForm ] = document.getElementsByTagName('form');
 const [ emailInput, passwordInput ] = document.getElementsByTagName('input');
 const [ loginButton, logoutButton ] = document.getElementsByTagName('button');
 
+const loginLoader = document.getElementsByClassName('login-form__loader')[0];
 const errorAlert = document.getElementsByClassName('login-form__error')[0];
 const avatarElement = document.getElementsByClassName('logout-form__avatar')[0];
 const usernameElement = document.getElementsByClassName('logout-form__username')[0];
@@ -19,9 +20,12 @@ async function login(event) {
 
     const AuthService = new LoginModule();
     try {
+        loginLoader.style.display = 'block';
         const data = await AuthService.login({ email, password });
+        loginLoader.style.display = 'none';
         onSuccessLogin(data);
     } catch (error) {
+        loginLoader.style.display = 'none';
         onErrorLogin(error);
     }
 }

@@ -75,6 +75,7 @@
 }
 
 .login-form {
+    position: relative;
     @extend %form-wrapper;
 
     &__title {
@@ -151,6 +152,16 @@
         @media (max-width: $sm-screen) {
             margin-top: 40px;
         }
+    }
+
+    &__loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
     }
 }
 
